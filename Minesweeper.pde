@@ -367,60 +367,65 @@ public class MSButton
             }
         }
     }
-    public void draw () 
+    public void draw ()
     {    
-        if (flagged){
-            fill(192,192,192);
-            rect(x, y, width, height);
-            fill(255,255,255);
-            rect(x, y, width-height/7, height/7);
-            rect(x, y, width/7, height-height/7);
-            fill(128,128,128);
-            rect(x, y+height-height/7, width, height/7);
-            rect(x+width-width/7, y, width/7, height);
-            fill(255,255,255);
-            triangle(x+width, y, x+width-width/7-1, y, x+width-width/7, y+height/7);
-            triangle(x, y+height, x, y+height-height/7-1, x+width/7, y+height-height/7);
-            imageMode(CENTER);
-            image(flag, x+width/2, y+height/2*1.1, width*0.6, height*0.6);
-            imageMode(CORNER);
+    float rx = round(x);
+    float ry = round(y);
+    float rw = round(width);
+    float rh = round(height);
+
+    if (flagged){
+        fill(192,192,192);
+        rect(rx, ry, rw, rh);
+        fill(255,255,255);
+        rect(rx, ry, rw-rh/7, rh/7);
+        rect(rx, ry, rw/7, rh-rh/7);
+        fill(128,128,128);
+        rect(rx, ry+rh-rh/7, rw, rh/7);
+        rect(rx+rw-rw/7, ry, rw/7, rh);
+        fill(255,255,255);
+        triangle(rx+rw, ry, rx+rw-rw/7-1, ry, rx+rw-rw/7, ry+rh/7);
+        triangle(rx, ry+rh, rx, ry+rh-rh/7-1, rx+rw/7, ry+rh-rh/7);
+        imageMode(CENTER);
+        image(flag, rx+rw/2, ry+(rh/2)*1.1, rw*0.6, rh*0.6);
+        imageMode(CORNER);
+    }
+    else if( clicked && mines.contains(this) ){
+        fill(192,192,192);
+        stroke(128,128,128);
+        strokeWeight(1);
+        rect(rx, ry, rw, rh);
+        noStroke();
+        strokeWeight(3);
+        if(this == firstMine){
+            fill(255,0,0);
+            rect(rx,ry,rw,rh);
         }
-        else if( clicked && mines.contains(this) ){
-            fill(192,192,192);
-            stroke(128,128,128);
-            strokeWeight(1);
-            rect(x, y, width, height);
-            noStroke();
-            strokeWeight(3);
-            if(this == firstMine){
-                fill(255,0,0);
-                rect(x,y,width,height);
-            }
-            image(img, x, y, width, height);
-            
-        }
-        else if(clicked){
-            fill(192,192,192);
-            stroke(128,128,128);
-            strokeWeight(1);
-            rect(x, y, width, height);
-            noStroke();
-        }
-        else{
-            fill(192,192,192);
-            rect(x, y, width, height);
-            fill(255,255,255);
-            rect(x, y, width-height/7, height/7);
-            rect(x, y, width/7, height-height/7);
-            fill(128,128,128);
-            rect(x, y+height-height/7, width, height/7);
-            rect(x+width-width/7, y, width/7, height);
-            fill(255,255,255);
-            triangle(x+width, y, x+width-width/7-1, y, x+width-width/7, y+height/7);
-            triangle(x, y+height, x, y+height-height/7-1, x+width/7, y+height-height/7);
-        }
-        fill(0);
-        text(myLabel,x+width/2,y+height/2);
+        image(img, rx, ry, rw, rh);
+        
+    }
+    else if(clicked){
+        fill(192,192,192);
+        stroke(128,128,128);
+        strokeWeight(1);
+        rect(rx, ry, rw, rh);
+        noStroke();
+    }
+    else{
+        fill(192,192,192);
+        rect(rx, ry, rw, rh);
+        fill(255,255,255);
+        rect(rx, ry, rw-rh/7, rh/7);
+        rect(rx, ry, rw/7, rh-rh/7);
+        fill(128,128,128);
+        rect(rx, ry+rh-rh/7, rw, rh/7);
+        rect(rx+rw-rw/7, ry, rw/7, rh);
+        fill(255,255,255);
+        triangle(rx+rw, ry, rx+rw-rw/7-1, ry, rx+rw-rw/7, ry+rh/7);
+        triangle(rx, ry+rh, rx, ry+rh-rh/7-1, rx+rw/7, ry+rh-rh/7);
+    }
+    fill(0);
+    text(myLabel,rx+rw/2,ry+rh/2);
     }
     public void setLabel(String newLabel)
     {
