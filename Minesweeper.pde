@@ -197,7 +197,7 @@ public void draw ()
     textSize(40);
     text(NUM_MINES - flagsPlaced, 100, 115);
     if(timerStarted && !gameLost && !isWon()){
-        elapsedTime = (millis() - startTime) / 1000;
+        elapsedTime = (int)((millis() - startTime) / 1000);
     }
     text(elapsedTime, 500, 115);
     textSize(32);
