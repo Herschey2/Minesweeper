@@ -105,14 +105,6 @@ public void setMines(int firstRow, int firstCol)
 }
 public void setDifficulty(int rows, int cols, int minesCount)
 {
-    if (buttons != null) {
-        for (int r = 0; r < NUM_ROWS; r++) {
-        for (int c = 0; c < NUM_COLS; c++) {
-            unregisterMethod("draw", buttons[r][c]);
-            unregisterMethod("mouseEvent", buttons[r][c]);
-        }
-        }
-    }
     mines.clear();
     NUM_ROWS = rows;
     NUM_COLS = cols;
@@ -209,6 +201,11 @@ public void draw ()
     }
     text(elapsedTime, 500, 115);
     textSize(32);
+    for (int r = 0; r < NUM_ROWS; r++) {
+        for (int c = 0; c < NUM_COLS; c++) {
+            buttons[r][c].draw();
+        }
+    }
 }
 public boolean isWon() 
 {
@@ -268,6 +265,14 @@ public void mousePressed()
     if (distance <= 40) {
         resetGame();
     }
+    for (int r = 0; r < NUM_ROWS; r++) {
+        for (int c = 0; c < NUM_COLS; c++) {
+            if (buttons[r][c].contains(mouseX, mouseY)) {
+                buttons[r][c].mousePressed();
+                return;
+            }
+        }
+    }
 }
 public class MSButton
 {
@@ -286,10 +291,11 @@ public class MSButton
         y = myRow*height+230;
         myLabel = "";
         flagged = clicked = false;
-        registerMethod("draw", this);
-        registerMethod("mouseEvent", this);
     }
-
+    public boolean contains(float mx, float my)
+    {
+        return mx >= x && mx < x + width && my >= y && my < y + height;
+    }
     public void mousePressed() 
     {
         if (gameLost || isWon())
