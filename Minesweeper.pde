@@ -313,9 +313,7 @@ public class MSButton
         if (flagged)
             return;
         if (clicked && myLabel.length() > 0){
-            int number = Integer.parseInt(myLabel);
-            int flaggedNeighbors = countFlaggedNeighbors();
-            if (flaggedNeighbors == number) {
+            if (countFlaggedNeighbors() == countMines(myRow, myCol)){
                 for (int r = myRow - 1; r <= myRow + 1; r++) {
                     for (int c = myCol - 1; c <= myCol + 1; c++) {
                         if (isValid(r, c)) {
