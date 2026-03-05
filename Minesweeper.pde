@@ -1,5 +1,5 @@
 /*  ideas
-
+hi
 Done:
 add the highlights and shadows on each button to make it look more 3D
 add the actual mine images instead of just red boxes
